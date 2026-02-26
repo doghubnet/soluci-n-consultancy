@@ -1,4 +1,7 @@
+'use client';
+
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 
 const links = [
@@ -20,9 +23,17 @@ export function SiteHeader() {
         </Link>
         <nav className='hidden items-center gap-6 lg:flex'>
           {links.map(([name, href]) => (
-            <Link key={href} href={href} className='text-sm text-slate-700 hover:text-navy'>
-              {name}
-            </Link>
+            <motion.div key={href} whileHover={{ scale: 1.03 }} transition={{ duration: 0.18 }} className='relative'>
+              <Link href={href} className='text-sm font-semibold text-slate-700 hover:text-navy'>
+                {name}
+              </Link>
+              <motion.span
+                className='absolute -bottom-1 left-0 h-0.5 w-full origin-left bg-gold'
+                initial={{ scaleX: 0 }}
+                whileHover={{ scaleX: 1 }}
+                transition={{ duration: 0.2 }}
+              />
+            </motion.div>
           ))}
         </nav>
         <div className='flex items-center gap-3'>

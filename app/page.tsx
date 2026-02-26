@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import { BrainCircuit, Compass, FileCheck2, Globe2, GraduationCap, ShieldCheck, Star, Users2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -72,6 +72,21 @@ const sectionItem = {
   show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: 'easeOut' } }
 };
 
+function MotionSection({ id, className, children }: { id?: string; className?: string; children: ReactNode }) {
+  return (
+    <motion.section
+      id={id}
+      className={className}
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.55, ease: 'easeOut' }}
+    >
+      {children}
+    </motion.section>
+  );
+}
+
 export default function HomePage() {
   const [popupOpen, setPopupOpen] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
@@ -95,7 +110,7 @@ export default function HomePage() {
   return (
     <>
       <section className='relative min-h-screen overflow-hidden'>
-        <Image src='https://i.imgur.com/ce6bW1G.jpg' alt='Diverse students celebrating scholarship wins' fill priority className='object-cover' />
+        <Image src='https://i.imgur.com/Jk2MqYu.jpg' alt='Diverse students celebrating scholarship wins' fill priority className='object-cover' />
         <div className='absolute inset-0 bg-gradient-to-r from-black/65 via-black/40 to-white/80' />
 
         <div className='section relative grid min-h-screen items-center gap-14 lg:grid-cols-2'>
@@ -127,7 +142,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className='section'>
+      <MotionSection className='section'>
         <h3 className='font-serif text-4xl text-navy'>The Challenge</h3>
         <div className='mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-4'>
           {challengeItems.map((item) => (
@@ -136,9 +151,9 @@ export default function HomePage() {
             </Card>
           ))}
         </div>
-      </section>
+      </MotionSection>
 
-      <section className='section bg-slate-50'>
+      <MotionSection className='section bg-slate-50'>
         <h3 className='font-serif text-4xl text-navy'>How Solución Consultancy Helps</h3>
         <div className='mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
           {benefits.map(({ icon: Icon, text }) => (
@@ -148,9 +163,9 @@ export default function HomePage() {
             </Card>
           ))}
         </div>
-      </section>
+      </MotionSection>
 
-      <section className='section'>
+      <MotionSection className='section'>
         <div className='flex items-center justify-between gap-4'>
           <h3 className='font-serif text-4xl text-navy'>Featured Programs</h3>
           <p className='text-sm text-slate-600'>Stripe / Lemon Squeezy Ready</p>
@@ -178,9 +193,9 @@ export default function HomePage() {
             </motion.div>
           ))}
         </motion.div>
-      </section>
+      </MotionSection>
 
-      <section className='section bg-slate-50'>
+      <MotionSection className='section bg-slate-50'>
         <h3 className='font-serif text-4xl text-navy'>Success Stories</h3>
         <div className='mt-8 rounded-3xl border bg-white p-8'>
           <AnimatePresence mode='wait'>
@@ -204,9 +219,9 @@ export default function HomePage() {
             ))}
           </div>
         </div>
-      </section>
+      </MotionSection>
 
-      <section className='section'>
+      <MotionSection className='section'>
         <h3 className='font-serif text-4xl text-navy'>The Science & Strategy Behind Every Win</h3>
         <div className='mt-8 grid gap-6 md:grid-cols-3'>
           {['Evidence-backed planning methods improve execution consistency.', 'Rubric-based positioning aligns student profiles with evaluator criteria.', 'Behavioral accountability systems help students complete stronger applications.'].map((fact) => (
@@ -215,9 +230,9 @@ export default function HomePage() {
             </Card>
           ))}
         </div>
-      </section>
+      </MotionSection>
 
-      <section className='section bg-slate-50'>
+      <MotionSection className='section bg-slate-50'>
         <h3 className='font-serif text-4xl text-navy'>Who This Is For</h3>
         <div className='mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-4'>
           {['International students', 'First-generation scholars', 'STEM applicants', 'Parents supporting applicants'].map((target) => (
@@ -227,9 +242,9 @@ export default function HomePage() {
             </Card>
           ))}
         </div>
-      </section>
+      </MotionSection>
 
-      <section id='faq' className='section'>
+      <MotionSection id='faq' className='section'>
         <h3 className='font-serif text-4xl text-navy'>FAQ</h3>
         <motion.div initial='hidden' whileInView='show' viewport={{ once: true, amount: 0.2 }} variants={sectionContainer}>
           <Accordion type='single' collapsible className='mt-8 rounded-2xl border px-6'>
@@ -243,9 +258,9 @@ export default function HomePage() {
             ))}
           </Accordion>
         </motion.div>
-      </section>
+      </MotionSection>
 
-      <section className='section text-center'>
+      <MotionSection className='section text-center'>
         <h3 className='font-serif text-5xl text-navy'>Ready to secure your scholarship advantage?</h3>
         <p className='mx-auto mt-5 max-w-2xl text-slate-600'>Start with our free Scholarship Success Starter Guide and build a confident path to full funding.</p>
         <div className='mt-8 flex justify-center gap-4'>
@@ -255,7 +270,7 @@ export default function HomePage() {
           </Link>
         </div>
         <p className='mt-6 text-xs text-slate-500'>Not affiliated with any university – professional guidance only.</p>
-      </section>
+      </MotionSection>
 
       <Dialog open={popupOpen} onOpenChange={setPopupOpen}>
         <DialogContent>
