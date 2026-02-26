@@ -39,9 +39,21 @@ const benefits = [
 ];
 
 const programs = [
-  { title: '12-Page Quick Start eBook', price: '$19 USD', image: 'photo-1498243691581-b145c3f54a5a' },
-  { title: 'Full 45-Page Scholarship Mastery Guide', price: '$49 USD', image: 'photo-1522202176988-66273c2fd55f' },
-  { title: 'Premium Scholarship Bundle', price: '$79 USD', image: 'photo-1521587760476-6c12a4b040da' }
+  {
+    title: '12-Page Quick Start eBook',
+    price: '$19 USD',
+    image: 'https://t3.ftcdn.net/jpg/15/15/14/04/360_F_1515140471_mFtGnASEb5Yy39lThGLErjKiARmWc8Bs.jpg'
+  },
+  {
+    title: 'Full 45-Page Scholarship Mastery Guide',
+    price: '$49 USD',
+    image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=85'
+  },
+  {
+    title: 'Premium Scholarship Bundle',
+    price: '$79 USD',
+    image: 'https://img.freepik.com/premium-photo/education-concept-books-cap_700248-22707.jpg?semt=ais_hybrid&w=740&q=80'
+  }
 ];
 
 const processSteps = [
@@ -75,10 +87,26 @@ const stats = [
 ];
 
 const newsItems = [
-  'Fully Funded USA Scholarship – Deadline March 15',
-  'New UK University Partnership Announced',
-  'Germany STEM Opportunity Update for International Applicants',
-  'Graduate Fellowship Openings for Fall Intake'
+  {
+    title: 'Fully Funded USA Scholarship – Deadline March 15, 2026',
+    brief:
+      'The prestigious Global Leaders Scholarship at University of Michigan is now open for international applicants. Covers full tuition, living stipend, and travel.'
+  },
+  {
+    title: 'New UK University Partnership Announced',
+    brief:
+      'Solución Consultancy has partnered with University of Oxford for exclusive application workshops. Early-bird deadline April 10, 2026.'
+  },
+  {
+    title: 'Germany STEM Opportunity Update for International Applicants',
+    brief:
+      "DAAD Fully Funded Master's in Engineering programs now accepting applications until March 31, 2026. No IELTS required for selected countries."
+  },
+  {
+    title: 'Graduate Fellowship Openings for Fall 2026 Intake',
+    brief:
+      'Chevening Scholarships (UK) and Fulbright Foreign Student Program (USA) deadlines extended to April 5, 2026. Full funding + leadership training.'
+  }
 ];
 
 const testimonials = [
@@ -154,8 +182,8 @@ export default function HomePage() {
 
   return (
     <>
-      <section className='relative min-h-screen overflow-hidden bg-black'>
-        <video autoPlay muted loop playsInline className='absolute inset-0 h-full w-full object-contain bg-black'>
+      <section className='relative min-h-screen overflow-hidden'>
+        <video autoPlay muted loop playsInline className='absolute inset-0 h-full w-full object-cover'>
           <source src='https://i.imgur.com/s7wLJ5o.mp4' type='video/mp4' />
         </video>
         <div className='absolute inset-0 bg-black/45' />
@@ -236,7 +264,7 @@ export default function HomePage() {
           {programs.map((program) => (
             <motion.div key={program.title} variants={sectionItem} whileHover={{ y: -6, scale: 1.03 }}>
               <Card className='overflow-hidden transition-shadow duration-300 hover:shadow-xl'>
-                <Image src={`https://images.unsplash.com/${program.image}?auto=format&fit=crop&w=1200&q=85`} alt={program.title} width={1200} height={700} className='h-56 w-full object-cover' />
+                <Image src={program.image} alt={program.title} width={1200} height={700} className='h-56 w-full object-cover' />
                 <div className='p-6'>
                   <Badge className='bg-gold/25 text-navy'>Instant Download</Badge>
                   <h4 className='mt-4 text-2xl font-semibold text-navy'>{program.title}</h4>
@@ -257,18 +285,21 @@ export default function HomePage() {
         </motion.div>
       </MotionSection>
 
-      <MotionSection className='section bg-slate-50'>
+      <MotionSection id='latest-news' className='section bg-slate-50'>
         <h3 className='font-serif text-4xl text-navy'>Latest News & Opportunities</h3>
-        <div className='mt-8 grid gap-6 lg:grid-cols-4'>
+        <motion.div initial='hidden' whileInView='show' viewport={{ once: true, amount: 0.2 }} variants={sectionContainer} className='mt-8 grid gap-6 lg:grid-cols-4'>
           {newsItems.map((item) => (
-            <motion.div key={item} whileHover={{ y: -4, scale: 1.02 }}>
+            <motion.div key={item.title} variants={sectionItem} whileHover={{ y: -4, scale: 1.02 }}>
               <Card className='h-full p-6'>
-                <p className='font-semibold text-navy'>{item}</p>
-                <Button variant='ghost' className='mt-4 px-0'>Read more</Button>
+                <p className='font-semibold text-navy'>{item.title}</p>
+                <p className='mt-3 text-sm text-slate-600'>{item.brief}</p>
+                <Button variant='outline' className='mt-5 h-11 rounded-full border-gold text-navy hover:bg-gold hover:text-navy'>
+                  Read more
+                </Button>
               </Card>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </MotionSection>
 
       <MotionSection className='section bg-slate-50'>
@@ -341,10 +372,15 @@ export default function HomePage() {
 
       <Dialog open={popupOpen} onOpenChange={setPopupOpen}>
         <DialogContent>
-          <h4 className='font-serif text-3xl text-navy'>Before you go, get your free Scholarship Success Starter Guide</h4>
-          <p className='mt-3 text-slate-600'>Instant access to a practical 4-page roadmap for winning scholarships.</p>
-          <Button className='mt-6' onClick={() => setPopupOpen(false)}>Download Free Guide</Button>
-          <p className='mt-4 text-xs text-slate-500'>Not affiliated with any university – professional guidance only.</p>
+          <motion.div initial={{ opacity: 0, scale: 0.94 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.28 }} className='text-center'>
+            <h4 className='text-balance font-serif text-4xl font-bold text-gold [text-shadow:0_2px_8px_rgba(30,58,95,0.35)]'>
+              Before you go, get your free Scholarship Success Starter Guide
+            </h4>
+            <p className='mt-4 text-slate-600'>Instant access to a practical 4-page roadmap for winning scholarships.</p>
+            <motion.div whileHover={{ y: -2 }} className='mt-8 flex justify-center'>
+              <Button onClick={() => setPopupOpen(false)}>Download Free Guide</Button>
+            </motion.div>
+          </motion.div>
         </DialogContent>
       </Dialog>
     </>

@@ -10,6 +10,14 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'i.imgur.com'
+      },
+      {
+        protocol: 'https',
+        hostname: 't3.ftcdn.net'
+      },
+      {
+        protocol: 'https',
+        hostname: 'img.freepik.com'
       }
     ]
   }
