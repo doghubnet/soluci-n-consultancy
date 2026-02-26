@@ -4,7 +4,23 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
-import { BrainCircuit, Compass, FileCheck2, Globe2, GraduationCap, ShieldCheck, Star, Users2 } from 'lucide-react';
+import {
+  BarChart3,
+  BrainCircuit,
+  ClipboardCheck,
+  Clock3,
+  Compass,
+  FileCheck2,
+  Globe2,
+  GraduationCap,
+  Hourglass,
+  Send,
+  ShieldCheck,
+  Star,
+  Trophy,
+  Users,
+  Users2
+} from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -26,6 +42,43 @@ const programs = [
   { title: '12-Page Quick Start eBook', price: '$19 USD', image: 'photo-1498243691581-b145c3f54a5a' },
   { title: 'Full 45-Page Scholarship Mastery Guide', price: '$49 USD', image: 'photo-1522202176988-66273c2fd55f' },
   { title: 'Premium Scholarship Bundle', price: '$79 USD', image: 'photo-1521587760476-6c12a4b040da' }
+];
+
+const processSteps = [
+  {
+    icon: ClipboardCheck,
+    title: 'Consultation & Assessment',
+    description: 'We evaluate your academic profile, goals, and country pathway to identify your best-fit scholarship opportunities.'
+  },
+  {
+    icon: Compass,
+    title: 'Personalized Planning & Application Strategy',
+    description: 'You receive a tailored timeline, essay plan, and application strategy designed for your strongest outcomes.'
+  },
+  {
+    icon: Send,
+    title: 'Application Submission & Visa Support',
+    description: 'We guide documentation, submission quality checks, and visa readiness for a smooth transition abroad.'
+  },
+  {
+    icon: Trophy,
+    title: 'Ongoing Mentorship & Success Tracking',
+    description: 'Continuous support ensures momentum from admission offers to enrollment and long-term academic success.'
+  }
+];
+
+const stats = [
+  { icon: Clock3, value: '4+ Years', label: 'guiding students to global education success' },
+  { icon: Users, value: '120+', label: 'Students assisted in achieving their international education goals' },
+  { icon: Hourglass, value: '1.8K+', label: 'Hours dedicated to student placement and support' },
+  { icon: BarChart3, value: '98.9%', label: 'Student satisfaction rate with our services' }
+];
+
+const newsItems = [
+  'Fully Funded USA Scholarship – Deadline March 15',
+  'New UK University Partnership Announced',
+  'Germany STEM Opportunity Update for International Applicants',
+  'Graduate Fellowship Openings for Fall Intake'
 ];
 
 const testimonials = [
@@ -62,15 +115,8 @@ const faqs = [
   ['Is my data safe?', '100% secure. We use enterprise-grade encryption and never share your information.']
 ] as const;
 
-const sectionContainer = {
-  hidden: { opacity: 0 },
-  show: { opacity: 1, transition: { staggerChildren: 0.12 } }
-};
-
-const sectionItem = {
-  hidden: { opacity: 0, y: 18 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: 'easeOut' } }
-};
+const sectionContainer = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.12 } } };
+const sectionItem = { hidden: { opacity: 0, y: 18 }, show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: 'easeOut' } } };
 
 function MotionSection({ id, className, children }: { id?: string; className?: string; children: ReactNode }) {
   return (
@@ -95,7 +141,6 @@ export default function HomePage() {
     const onLeave = (event: MouseEvent) => {
       if (event.clientY <= 8) setPopupOpen(true);
     };
-
     document.addEventListener('mouseleave', onLeave);
     return () => document.removeEventListener('mouseleave', onLeave);
   }, []);
@@ -109,46 +154,63 @@ export default function HomePage() {
 
   return (
     <>
-      <section className='relative min-h-screen overflow-hidden'>
-        <Image src='https://i.imgur.com/Jk2MqYu.jpg' alt='Diverse students celebrating scholarship wins' fill priority className='object-cover' />
-        <div className='absolute inset-0 bg-gradient-to-r from-black/65 via-black/40 to-white/80' />
+      <section className='relative min-h-screen overflow-hidden bg-black'>
+        <video autoPlay muted loop playsInline className='absolute inset-0 h-full w-full object-contain bg-black'>
+          <source src='https://i.imgur.com/s7wLJ5o.mp4' type='video/mp4' />
+        </video>
+        <div className='absolute inset-0 bg-black/45' />
 
-        <div className='section relative grid min-h-screen items-center gap-14 lg:grid-cols-2'>
-          <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className='text-white'>
+        <div className='section relative flex min-h-screen items-center'>
+          <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className='max-w-3xl text-white'>
             <p className='mb-4 inline-flex rounded-full bg-white/15 px-4 py-2 text-xs tracking-[0.2em] text-white'>SOLUCIÓN CONSULTANCY · GLOBAL</p>
             <h1 className='font-serif text-5xl leading-tight md:text-7xl'>Your Global Solution to Winning Full Scholarships</h1>
-            <p className='mt-6 max-w-xl text-lg text-slate-100'>Proven strategies + practical tools that help students from 50+ countries secure full scholarships at top universities.</p>
-          </motion.div>
-
-          <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.1 }} className='max-w-xl rounded-[2rem] bg-white/95 p-8 shadow-2xl lg:p-10'>
-            <p className='font-serif text-5xl leading-none tracking-tight text-gold'>hey there!</p>
-            <h2 className='mt-2 font-serif text-5xl font-bold leading-tight text-navy'>Welcome to Solución Consultancy.</h2>
-            <p className='mt-6 text-lg leading-relaxed text-slate-700'>
-              Solución Consultancy exists to turn your scholarship dreams into reality.
-              <br />
-              <br />
-              Rooted in proven strategies and real-world success with students from 50+ countries, we deliver simple, powerful tools that actually work – from finding the right opportunities to crafting winning applications and securing full funding.
-              <br />
-              <br />
-              We meet you exactly where you are and tailor every step to your unique goals and background.
+            <p className='mt-6 max-w-2xl text-lg text-slate-100'>
+              Proven strategies + practical tools that help students from 50+ countries secure full scholarships at top universities.
             </p>
-            <div className='mt-8 flex flex-wrap gap-4'>
+            <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 0.55 }} className='mt-10 flex flex-wrap gap-4'>
               <Button size='lg'>Download Free Guide</Button>
               <Link href='/programs'>
                 <Button size='lg' variant='outline'>Browse Programs</Button>
               </Link>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </section>
+
+      <MotionSection id='process' className='section bg-slate-50'>
+        <h3 className='font-serif text-4xl text-navy'>Your Scholarship Journey – Step by Step</h3>
+        <motion.div initial='hidden' whileInView='show' viewport={{ once: true, amount: 0.2 }} variants={sectionContainer} className='mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-4'>
+          {processSteps.map(({ icon: Icon, title, description }) => (
+            <motion.div key={title} variants={sectionItem} whileHover={{ y: -6, scale: 1.03 }}>
+              <Card className='h-full bg-[#10293f] p-6 text-white shadow-lg'>
+                <Icon className='h-7 w-7 text-gold' />
+                <h4 className='mt-4 text-lg font-semibold'>{title}</h4>
+                <p className='mt-3 text-sm text-slate-200'>{description}</p>
+              </Card>
+            </motion.div>
+          ))}
+        </motion.div>
+      </MotionSection>
+
+      <MotionSection className='section'>
+        <motion.div initial='hidden' whileInView='show' viewport={{ once: true, amount: 0.2 }} variants={sectionContainer} className='grid gap-6 md:grid-cols-2 lg:grid-cols-4'>
+          {stats.map(({ icon: Icon, value, label }) => (
+            <motion.div key={value} variants={sectionItem} whileHover={{ scale: 1.03 }}>
+              <Card className='p-6'>
+                <Icon className='h-7 w-7 text-gold' />
+                <p className='mt-4 text-3xl font-bold text-navy'>{value}</p>
+                <p className='mt-2 text-sm text-slate-600'>{label}</p>
+              </Card>
+            </motion.div>
+          ))}
+        </motion.div>
+      </MotionSection>
 
       <MotionSection className='section'>
         <h3 className='font-serif text-4xl text-navy'>The Challenge</h3>
         <div className='mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-4'>
           {challengeItems.map((item) => (
-            <Card key={item} className='p-6 text-lg font-semibold text-navy'>
-              {item}
-            </Card>
+            <Card key={item} className='p-6 text-lg font-semibold text-navy'>{item}</Card>
           ))}
         </div>
       </MotionSection>
@@ -172,8 +234,8 @@ export default function HomePage() {
         </div>
         <motion.div initial='hidden' whileInView='show' viewport={{ once: true, amount: 0.15 }} variants={sectionContainer} className='mt-8 grid gap-8 lg:grid-cols-3'>
           {programs.map((program) => (
-            <motion.div key={program.title} variants={sectionItem}>
-              <Card className='overflow-hidden transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl'>
+            <motion.div key={program.title} variants={sectionItem} whileHover={{ y: -6, scale: 1.03 }}>
+              <Card className='overflow-hidden transition-shadow duration-300 hover:shadow-xl'>
                 <Image src={`https://images.unsplash.com/${program.image}?auto=format&fit=crop&w=1200&q=85`} alt={program.title} width={1200} height={700} className='h-56 w-full object-cover' />
                 <div className='p-6'>
                   <Badge className='bg-gold/25 text-navy'>Instant Download</Badge>
@@ -196,14 +258,26 @@ export default function HomePage() {
       </MotionSection>
 
       <MotionSection className='section bg-slate-50'>
+        <h3 className='font-serif text-4xl text-navy'>Latest News & Opportunities</h3>
+        <div className='mt-8 grid gap-6 lg:grid-cols-4'>
+          {newsItems.map((item) => (
+            <motion.div key={item} whileHover={{ y: -4, scale: 1.02 }}>
+              <Card className='h-full p-6'>
+                <p className='font-semibold text-navy'>{item}</p>
+                <Button variant='ghost' className='mt-4 px-0'>Read more</Button>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
+      </MotionSection>
+
+      <MotionSection className='section bg-slate-50'>
         <h3 className='font-serif text-4xl text-navy'>Success Stories</h3>
         <div className='mt-8 rounded-3xl border bg-white p-8'>
           <AnimatePresence mode='wait'>
             <motion.div key={activeTestimonial.name} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.3 }}>
               <div className='flex items-center gap-4'>
-                <div className='grid h-14 w-14 place-items-center rounded-full bg-cream text-navy'>
-                  <Star className='h-5 w-5 text-gold' />
-                </div>
+                <div className='grid h-14 w-14 place-items-center rounded-full bg-cream text-navy'><Star className='h-5 w-5 text-gold' /></div>
                 <div>
                   <p className='text-xl font-semibold text-navy'>{activeTestimonial.name}</p>
                   <p className='text-sm text-slate-600'>{activeTestimonial.country}</p>
@@ -225,9 +299,7 @@ export default function HomePage() {
         <h3 className='font-serif text-4xl text-navy'>The Science & Strategy Behind Every Win</h3>
         <div className='mt-8 grid gap-6 md:grid-cols-3'>
           {['Evidence-backed planning methods improve execution consistency.', 'Rubric-based positioning aligns student profiles with evaluator criteria.', 'Behavioral accountability systems help students complete stronger applications.'].map((fact) => (
-            <Card key={fact} className='p-6 text-navy'>
-              {fact}
-            </Card>
+            <Card key={fact} className='p-6 text-navy'>{fact}</Card>
           ))}
         </div>
       </MotionSection>
@@ -236,10 +308,7 @@ export default function HomePage() {
         <h3 className='font-serif text-4xl text-navy'>Who This Is For</h3>
         <div className='mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-4'>
           {['International students', 'First-generation scholars', 'STEM applicants', 'Parents supporting applicants'].map((target) => (
-            <Card key={target} className='p-6 text-navy'>
-              <Compass className='mb-4 h-6 w-6 text-gold' />
-              {target}
-            </Card>
+            <Card key={target} className='p-6 text-navy'><Compass className='mb-4 h-6 w-6 text-gold' />{target}</Card>
           ))}
         </div>
       </MotionSection>
@@ -265,9 +334,7 @@ export default function HomePage() {
         <p className='mx-auto mt-5 max-w-2xl text-slate-600'>Start with our free Scholarship Success Starter Guide and build a confident path to full funding.</p>
         <div className='mt-8 flex justify-center gap-4'>
           <Button size='lg'>Get Free Guide</Button>
-          <Link href='/contact'>
-            <Button size='lg' variant='outline'>Book 1:1 Consulting</Button>
-          </Link>
+          <Link href='/contact'><Button size='lg' variant='outline'>Book 1:1 Consulting</Button></Link>
         </div>
         <p className='mt-6 text-xs text-slate-500'>Not affiliated with any university – professional guidance only.</p>
       </MotionSection>
