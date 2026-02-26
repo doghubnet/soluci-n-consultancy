@@ -86,7 +86,7 @@ export default function HomePage() {
     <>
       <section className='relative min-h-screen overflow-hidden'>
         <Image
-          src='https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=2000&q=90'
+          src='https://i.imgur.com/ce6bW1G.jpg'
           alt='Diverse students celebrating scholarship wins'
           fill
           priority

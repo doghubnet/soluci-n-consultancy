@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Facebook, Instagram, Linkedin, Music2, Youtube } from 'lucide-react';
+import { Facebook, Instagram, Linkedin, Mail, MessageCircle, Twitter } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 
@@ -31,12 +31,26 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className='mt-10 flex gap-4 text-navy'>
-          <Instagram />
-          <Linkedin />
-          <Youtube />
-          <Music2 />
-          <Facebook />
+        <div className='mt-10 flex flex-wrap items-center gap-4 text-navy'>
+          <a href='https://www.instagram.com/aggregateconsultant' target='_blank' rel='noreferrer noopener' className='transition hover:text-gold' aria-label='Instagram'>
+            <Instagram />
+          </a>
+          <a href='https://www.linkedin.com/in/gediyon-adamu-yeshitila-080b90338' target='_blank' rel='noreferrer noopener' className='transition hover:text-gold' aria-label='LinkedIn'>
+            <Linkedin />
+          </a>
+          <a href='https://www.facebook.com/gediyonadamusi' target='_blank' rel='noreferrer noopener' className='transition hover:text-gold' aria-label='Facebook'>
+            <Facebook />
+          </a>
+          <a href='https://t.me/scholartransfer' target='_blank' rel='noreferrer noopener' className='transition hover:text-gold' aria-label='Telegram'>
+            <MessageCircle />
+          </a>
+          <a href='https://x.com/gediyon_adamu' target='_blank' rel='noreferrer noopener' className='transition hover:text-gold' aria-label='X'>
+            <Twitter />
+          </a>
+          <a href='mailto:scelta.infinity@gmail.com' className='inline-flex items-center gap-2 transition hover:text-gold'>
+            <Mail className='h-5 w-5' />
+            <span className='text-sm'>scelta.infinity@gmail.com</span>
+          </a>
         </div>
 
         <div className='mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4'>
